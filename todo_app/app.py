@@ -2,6 +2,7 @@
 from flask import Flask,render_template, request, redirect, url_for
 from todo_app.flask_config import Config
 from todo_app.data import session_items
+import operator
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -9,7 +10,7 @@ app.config.from_object(Config())
 
 @app.route('/')
 def index():
-    return render_template('index.html', items=session_items.get_items(), route='display')
+    return render_template('index.html', items=sorted(session_items.get_items(),key = operator.itemgetter('status')), route='display')
 
 @app.route('/add', methods=['GET','POST'])
 def addtodo():
