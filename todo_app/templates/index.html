@@ -21,6 +21,7 @@
             <td>{{item['title']}}</td>
             <td>{{item['status']}}</td>
             <td><a href="/update?id={{item['id']}}"> Update </a></td>
+            <td><a href="/delete?id={{item['id']}}"> Delete </a></td>
           </tr>
           {%endfor%}
         </table>
