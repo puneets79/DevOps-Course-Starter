@@ -4,9 +4,9 @@
 {% block content %}
   <div class="jumbotron">
     <h1 class="display-4">To-Do App</h1>
-    <p class="lead">Just another to-do app.</p>
+    <p class="lead">My TODO tracker</p>
   </div>
-
+  {%if route=='display'%}
   <div class="row">
     <div class="col-md-12">
       <h2>Items</h2>
@@ -20,11 +20,41 @@
             <td>{{item['id']}}</td>
             <td>{{item['title']}}</td>
             <td>{{item['status']}}</td>
+            <td><a href="/update?id={{item['id']}}"> Update </a></td>
           </tr>
           {%endfor%}
         </table>
-        
+        <a href = "/add"> Add a task</a>
       </ul>
     </div>
   </div>
+  {%endif%}
+  {%if route=='add'%}
+  <div class="row">
+    <div class="col-md-12">
+      <form name="Add Todo" method = "POST">
+        <label for="taskname">Task Title : </label><br>
+        <input type="text" id="taskname" name="taskname"><br>
+        <input type="submit" value = "Save">
+      </form>
+    </div>
+  </div>
+  {%endif%}
+  {%if route=='update'%}
+  <div class="row">
+    <div class="col-md-12">
+      <form name="Update Todo" method = "POST">
+        <input type="hidden" id="id" name="id" value = "{{item['id']}}">
+        <label for="taskname">Task Title : </label><br>
+        <input type="text" id="taskname" name="taskname" value = "{{item['title']}}"><br>
+        <select name="status" id="status">
+          <option value="Not Started" selected>Not started</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Done">Done</option>
+      </select><><br>
+        <input type="submit" value = "Save">
+      </form>
+    </div>
+  </div>
+  {%endif%}
 {% endblock %}
