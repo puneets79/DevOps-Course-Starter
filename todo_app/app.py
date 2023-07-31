@@ -34,5 +34,11 @@ def updatetodo():
         print (item)
         session_items.save_item(item)
         return redirect('/')
+    
+@app.route('/delete')
+def deletetodo():
+    id = int(request.values.get("id",""))
+    session_items.delete_item(id)
+    return redirect('/')
 
     
