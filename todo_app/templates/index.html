@@ -17,9 +17,9 @@
           <th>ID</th><th>Title</th><th>Status</th>
           {%for item in items%}
           <tr>
-            <td>{{item['id']}}</td>
-            <td>{{item['title']}}</td>
-            <td>{{item['status']}}</td>
+            <td>{{item['id ']}}</td>
+            <td>{{item['name']}}</td>
+            <td>{{item['listname']}}</td>
             <td><a href="/update?id={{item['id']}}"> Update </a></td>
             <td><a href="/delete?id={{item['id']}}"> Delete </a></td>
           </tr>
@@ -36,6 +36,11 @@
       <form name="Add Todo" method = "POST">
         <label for="taskname">Task Title : </label><br>
         <input type="text" id="taskname" name="taskname"><br>
+        <select name="status" id="status">
+          {%for status in statuses%}
+          <option value={{ status['id'] }}>{{ status['name'] }}</option>
+          {%endfor%}
+          </select><br>
         <input type="submit" value = "Save">
       </form>
     </div>
@@ -47,14 +52,15 @@
       <form name="Update Todo" method = "POST">
         <input type="hidden" id="id" name="id" value = "{{item['id']}}">
         <label for="taskname">Task Title : </label><br>
-        <input type="text" id="taskname" name="taskname" value = "{{item['title']}}"><br>
+        <input type="text" id="taskname" name="taskname" value = "{{item['name']}}"><br>
         <select name="status" id="status">
-          <option value="Not Started" selected>Not started</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Done">Done</option>
-      </select><><br>
+          {%for status in statuses%}
+          <option value={{ status['id'] }} selected>{{ status['name'] }}</option>
+          {%endfor%}
+          </select><br>
         <input type="submit" value = "Save">
       </form>
+
     </div>
   </div>
   {%endif%}
