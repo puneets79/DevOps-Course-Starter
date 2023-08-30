@@ -1,7 +1,7 @@
 
 from flask import Flask,render_template, request, redirect, url_for
 from todo_app.flask_config import Config
-from todo_app.data import session_items,trello_items
+from todo_app.data import trello_items
 import operator
 
 app = Flask(__name__)
