@@ -15,7 +15,7 @@ def index():
 @app.route('/add', methods=['GET','POST'])
 def addtodo():
     if (request.method == 'GET'):
-        return render_template('index.html',route='add',statuses=trello_items.get_lists())
+        return render_template('add.html',statuses=trello_items.get_lists())
     else:
         item = {}
         item['name'] = request.form.get('taskname')
@@ -29,7 +29,7 @@ def updatetodo():
         id = request.values.get("id","")
         item = trello_items.get_item(id)
         statusList = trello_items.get_lists()
-        return render_template('index.html',route='update', item = item, statuses = statusList)
+        return render_template('update.html', item = item, statuses = statusList)
     else:
         id = request.form.get('id')
         taskname = request.form.get('taskname')

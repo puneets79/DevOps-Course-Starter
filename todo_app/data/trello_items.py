@@ -10,7 +10,7 @@ def get_items():
     """
     key=str(os.getenv('API_KEY'))
     token=str(os.getenv('API_TOKEN'))
-    url = "https://api.trello.com/1/boards/64e9f4bb863cb6be33f77851/lists?cards=open&key="+key+"&token="+token
+    url = "https://api.trello.com/1/boards/"+os.getenv('BOARD_ID')+"/lists?cards=open&key="+key+"&token="+token
 
     response = requests.get(url=url)
     responseList = response.json()
@@ -30,7 +30,7 @@ def get_lists():
     """
     key=str(os.getenv('API_KEY'))
     token=str(os.getenv('API_TOKEN'))
-    url = "https://api.trello.com/1/boards/64e9f4bb863cb6be33f77851/lists?key="+key+"&token="+token
+    url = "https://api.trello.com/1/boards/"+os.getenv('BOARD_ID')+"/lists?key="+key+"&token="+token
 
     response = requests.get(url=url)
     responseList = response.json()

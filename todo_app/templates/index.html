@@ -4,9 +4,8 @@
 {% block content %}
   <div class="jumbotron">
     <h1 class="display-4">To-Do App</h1>
-    <p class="lead">My TODO tracker</p>
+    <p class="lead">My Trello tracker</p>
   </div>
-  {%if route=='display'%}
   <div class="row">
     <div class="col-md-12">
       <h2>Items</h2>
@@ -29,39 +28,5 @@
       </ul>
     </div>
   </div>
-  {%endif%}
-  {%if route=='add'%}
-  <div class="row">
-    <div class="col-md-12">
-      <form name="Add Todo" method = "POST">
-        <label for="taskname">Task Title : </label><br>
-        <input type="text" id="taskname" name="taskname"><br>
-        <select name="status" id="status">
-          {%for status in statuses%}
-          <option value={{ status['id'] }}>{{ status['name'] }}</option>
-          {%endfor%}
-          </select><br>
-        <input type="submit" value = "Save">
-      </form>
-    </div>
-  </div>
-  {%endif%}
-  {%if route=='update'%}
-  <div class="row">
-    <div class="col-md-12">
-      <form name="Update Todo" method = "POST">
-        <input type="hidden" id="id" name="id" value = "{{item['id']}}">
-        <label for="taskname">Task Title : </label><br>
-        <input type="text" id="taskname" name="taskname" value = "{{item['name']}}"><br>
-        <select name="status" id="status">
-          {%for status in statuses%}
-          <option value={{ status['id'] }} selected>{{ status['name'] }}</option>
-          {%endfor%}
-          </select><br>
-        <input type="submit" value = "Save">
-      </form>
-
-    </div>
-  </div>
-  {%endif%}
+  
 {% endblock %}
