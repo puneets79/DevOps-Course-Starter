@@ -20,6 +20,7 @@ def addtodo():
         item = {}
         item['name'] = request.form.get('taskname')
         item['idList'] = request.form.get('status')
+        item['desc'] = request.form.get('taskdesc')
         trello_items.add_item(item)
         return redirect('/')
     
@@ -34,7 +35,8 @@ def updatetodo():
         id = request.form.get('id')
         taskname = request.form.get('taskname')
         status = request.form.get('status')
-        item = {'id':id, 'name':taskname, 'status':status}
+        desc = request.form.get('taskdesc')
+        item = {'id':id, 'name':taskname, 'status':status, 'desc':desc}
         print (item)
         trello_items.save_item(item)
         return redirect('/')

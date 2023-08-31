@@ -16,11 +16,11 @@
           <th>ID</th><th>Title</th><th>Status</th>
           {%for item in items%}
           <tr>
-            <td>{{item['id']}}</td>
-            <td>{{item['name']}}</td>
-            <td>{{item['listname']}}</td>
-            <td><a href="/update?id={{item['id']}}"> Update </a></td>
-            <td><a href="/delete?id={{item['id']}}"> Delete </a></td>
+            <td>{{item.name}}</td>
+            <td>{{item.desc}}</td>
+            <td>{{item.status}}</td>
+            <td><a href="/update?id={{item.id}}"> Update </a></td>
+            <td><a href="/delete?id={{item.id}}"> Delete </a></td>
           </tr>
           {%endfor%}
         </table>

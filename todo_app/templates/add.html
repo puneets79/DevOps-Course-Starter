@@ -11,6 +11,9 @@
       <form name="Add Todo" method = "POST">
         <label for="taskname">Task Title : </label><br>
         <input type="text" id="taskname" name="taskname"><br>
+        <label for="taskdesc">Task description : </label><br>
+        <input type="text" id="taskdesc" name="taskdesc"><br>
+        <label for="status">Task Status : </label><br>
         <select name="status" id="status">
           {%for status in statuses%}
           <option value={{ status['id'] }}>{{ status['name'] }}</option>

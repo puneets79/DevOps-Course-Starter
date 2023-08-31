@@ -1,5 +1,6 @@
 import requests
 import os
+from todo_app.data import Item
 
 def get_items():
     """
@@ -17,8 +18,8 @@ def get_items():
     cards=[]
     for item in responseList:
       for card in item['cards']:
-        card['listname']=item['name']
-        cards.append(card)
+        myCard = Item.Item.from_trello_card(card,item)
+        cards.append(myCard)
     
     return cards
 def get_lists():
@@ -49,7 +50,6 @@ def get_item(id):
 
     response = requests.get(url=url)
     card = response.json()
-    
     return card
 
 def save_item(item):
@@ -70,7 +70,8 @@ def save_item(item):
       'key': key,
       'token': token,
       'name' : item['name'],
-      'idList' : item['status']
+      'idList' : item['status'],
+      'desc' : item['desc']
     }
 
     response = requests.request(
@@ -118,7 +119,8 @@ def add_item(item):
       'key': key,
       'token': token,
       'name' : item['name'],
-      'idList' : item['idList']
+      'idList' : item['idList'],
+      'desc' : item['desc']
       }
 
     response = requests.request(

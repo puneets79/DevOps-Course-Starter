@@ -12,6 +12,9 @@
         <input type="hidden" id="id" name="id" value = "{{item['id']}}">
         <label for="taskname">Task Title : </label><br>
         <input type="text" id="taskname" name="taskname" value = "{{item['name']}}"><br>
+        <label for="taskdesc">Task description : </label><br>
+        <input type="text" id="taskdesc" name="taskdesc" value = "{{ item['desc'] }}"><br>
+        <label for="status">Task Status : </label><br>
         <select name="status" id="status">
           {%for status in statuses%}
           <option value={{ status['id'] }} selected>{{ status['name'] }}</option>
