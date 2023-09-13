@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}To-Do App{% endblock %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1 class="display-4">To-Do App</h1>
+    <p class="lead">My Trello Tracker</p>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form name="Update Todo" method = "POST">
+        <input type="hidden" id="id" name="id" value = "{{item['id']}}">
+        <label for="taskname">Task Title : </label><br>
+        <input type="text" id="taskname" name="taskname" value = "{{item['name']}}"><br>
+        <label for="taskdesc">Task description : </label><br>
+        <input type="text" id="taskdesc" name="taskdesc" value = "{{ item['desc'] }}"><br>
+        <label for="status">Task Status : </label><br>
+        <select name="status" id="status">
+          {%for status in statuses%}
+          <option value={{ status['id'] }} selected>{{ status['name'] }}</option>
+          {%endfor%}
+          </select><br>
+        <input type="submit" value = "Save">
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
