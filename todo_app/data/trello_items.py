@@ -11,8 +11,10 @@ def get_items():
     """
     key=str(os.getenv('API_KEY'))
     token=str(os.getenv('API_TOKEN'))
-    url = "https://api.trello.com/1/boards/"+os.getenv('BOARD_ID')+"/lists?cards=open&key="+key+"&token="+token
-
+    board = os.getenv('BOARD_ID')
+    url = f'https://api.trello.com/1/boards/{board}/lists?cards=open&key={key}&token={token}'
+    
+    
     response = requests.get(url=url)
     responseList = response.json()
     cards=[]
