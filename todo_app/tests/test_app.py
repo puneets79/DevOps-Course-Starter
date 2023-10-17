@@ -33,7 +33,7 @@ def stub(url, params={}):
     if url == trello_url:
         fake_response_data = [{
             'id': '123abc',
-            'name': 'To Do',
+            'name': 'To do',
             'cards': [{'id': '456', 'name': 'Test card', 'desc': 'Test Card'}]
         }]
         return StubResponse(fake_response_data)
@@ -47,5 +47,5 @@ def test_index_page(monkeypatch: pytest.MonkeyPatch, client: FlaskClient):
     response = client.get('/')
     print (response.data.decode())
     assert response.status_code == 200
-    assert 'To-Do App' in response.data.decode()
+    assert 'Test card' in response.data.decode()
 
