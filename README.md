@@ -58,3 +58,9 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Testing the App
+
+There have been some Unit Tests written for this app under the test folder. These can be run using the command
+
+$ poetry run pytest
