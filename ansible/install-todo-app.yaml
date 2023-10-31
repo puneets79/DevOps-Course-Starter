@@ -55,6 +55,8 @@
     ansible.builtin.git:
       repo: https://github.com/puneets79/DevOps-Course-Starter.git
       dest: /opt/todoapp
+      version: module-4
+
   
   
   - name: Install Poetry dependencies
@@ -71,8 +73,8 @@
   
   - name: copy todoapp service file
     ansible.builtin.command:
-      chdir: /opt/todoapp/
-      cmd: cp todoapp.service /etc/systemd/system/todoapp.service
+      cmd: cp /opt/todoapp/todoapp.service /etc/systemd/system/todoapp.service
+    become: yes
       
     
   - name: Start Todo App
