@@ -4,4 +4,4 @@ Description=My To-Do App
 [Service]
 User=ec2-user
 WorkingDirectory=/opt/todoapp
-ExecStart=/home/ec2-user/.local/bin/poetry run gunicorn run --bind 0.0.0.0 "todo_app.app:create_app()"
+ExecStart=/home/ec2-user/.local/bin/poetry run gunicorn --bind 0.0.0.0 "todo_app.app:create_app()"
