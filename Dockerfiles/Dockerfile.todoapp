@@ -1,0 +1,9 @@
+FROM python
+RUN pip install poetry
+RUN mkdir /opt/todoapp
+WORKDIR /opt/todoapp
+COPY /Users/puneetsharma/DevOpsProject/DevOps-Course-Starter/.env /Users/puneetsharma/DevOpsProject/DevOps-Course-Starter/poetry.lock /Users/puneetsharma/DevOpsProject/DevOps-Course-Starter/*.toml /Users/puneetsharma/DevOpsProject/DevOps-Course-Starter/gunicorn.conf.py ./
+COPY /Users/puneetsharma/DevOpsProject/DevOps-Course-Starter/todo_app ./todo_app
+RUN poetry install
+EXPOSE 8080
+ENTRYPOINT [ "poetry run gunicorn --bind 0.0.0.0 "todo_app.app:create_app()"" ]
