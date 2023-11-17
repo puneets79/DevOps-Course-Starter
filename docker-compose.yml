@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  dev:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/Dockerfile.todoapp
+      target: dev
+    volumes:
+      - type: bind
+        source: ./todo_app
+        target: /app/todo_app
+    env_file:
+      - ./.env
+    environment:
+      - FLASK_HOST=0.0.0.0
+    ports:
+      - 5001:5000
+  test:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/Dockerfile.todoapp
+      target: test
+    env_file:
+      - todo_app/.env.test
+  prod:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/Dockerfile.todoapp
+      target: production
+    env_file:
+      - ./.env
+    ports:
+      - 80:8000
+
+
+  

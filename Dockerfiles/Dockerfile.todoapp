@@ -1,9 +1,34 @@
-FROM python
+FROM python:3.11.6-alpine3.18 as base
+RUN mkdir /app
+WORKDIR /app
+
+RUN pip install pip --upgrade
 RUN pip install poetry
-RUN mkdir /opt/todoapp
-WORKDIR /opt/todoapp
-COPY /Users/puneetsharma/DevOpsProject/DevOps-Course-Starter/.env /Users/puneetsharma/DevOpsProject/DevOps-Course-Starter/poetry.lock /Users/puneetsharma/DevOpsProject/DevOps-Course-Starter/*.toml /Users/puneetsharma/DevOpsProject/DevOps-Course-Starter/gunicorn.conf.py ./
-COPY /Users/puneetsharma/DevOpsProject/DevOps-Course-Starter/todo_app ./todo_app
-RUN poetry install
-EXPOSE 8080
-ENTRYPOINT [ "poetry run gunicorn --bind 0.0.0.0 "todo_app.app:create_app()"" ]
+COPY ./poetry.lock ./
+COPY ./*.toml ./
+
+FROM base as dev
+RUN  poetry install --no-root
+COPY todo_app ./todo_app
+COPY ./poetry_dev.sh ./poetry.sh
+RUN chmod +x poetry.sh
+ENV PYTHONPATH=/app
+EXPOSE 5000
+CMD [ "./poetry.sh" ]
+
+FROM base as test
+RUN  poetry install --no-root
+COPY todo_app ./todo_app
+COPY ./poetry_test.sh ./poetry.sh
+RUN chmod +x poetry.sh
+ENV PYTHONPATH=/app
+CMD [ "./poetry.sh" ]
+
+FROM base as production
+RUN  poetry install --no-root --no-dev
+COPY todo_app ./todo_app
+COPY ./poetry_prod.sh ./poetry.sh
+RUN chmod +x poetry.sh
+ENV PYTHONPATH=/app
+EXPOSE 8000
+CMD [ "./poetry.sh" ]
