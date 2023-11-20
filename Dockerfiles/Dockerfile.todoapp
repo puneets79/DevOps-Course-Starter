@@ -12,15 +12,18 @@ RUN  poetry install --no-root
 COPY todo_app ./todo_app
 COPY ./poetry_dev.sh ./poetry.sh
 RUN chmod +x poetry.sh
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
 ENV PYTHONPATH=/app
 EXPOSE 5000
 CMD [ "./poetry.sh" ]
 
 FROM base as test
 RUN  poetry install --no-root
-COPY todo_app ./todo_app
 COPY ./poetry_test.sh ./poetry.sh
 RUN chmod +x poetry.sh
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
 ENV PYTHONPATH=/app
 CMD [ "./poetry.sh" ]
 
@@ -29,6 +32,8 @@ RUN  poetry install --no-root --no-dev
 COPY todo_app ./todo_app
 COPY ./poetry_prod.sh ./poetry.sh
 RUN chmod +x poetry.sh
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
 ENV PYTHONPATH=/app
 EXPOSE 8000
 CMD [ "./poetry.sh" ]
