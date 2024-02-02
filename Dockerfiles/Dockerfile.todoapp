@@ -6,10 +6,10 @@ RUN pip install pip --upgrade
 RUN pip install poetry
 COPY ./poetry.lock ./
 COPY ./*.toml ./
+COPY todo_app ./todo_app
 
 FROM base as dev
 RUN  poetry install --no-root
-COPY todo_app ./todo_app
 COPY ./poetry_dev.sh ./poetry.sh
 RUN chmod +x poetry.sh
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
@@ -29,11 +29,10 @@ CMD [ "./poetry.sh" ]
 
 FROM base as production
 RUN  poetry install --no-root --no-dev
-COPY todo_app ./todo_app
 COPY ./poetry_prod.sh ./poetry.sh
 RUN chmod +x poetry.sh
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
 ENV PYTHONPATH=/app
 EXPOSE 8000
-CMD [ "./poetry.sh" ]
+ENTRYPOINT [ "poetry","run","gunicorn","--bind","0.0.0.0","todo_app.app:create_app()" ]

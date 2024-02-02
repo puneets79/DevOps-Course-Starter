@@ -64,3 +64,19 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 There have been some Unit Tests written for this app under the test folder. These can be run using the command
 
 $ poetry run pytest
+
+You can run the application through Docker, selecting the appropriate command for the task/environment you want to run:
+
+```bash
+# runs on local port 5001
+docker compose up --build dev
+docker compose up --build test
+# runs on local port 80
+docker compose up --build prod
+```
+
+Or if you want to run them all:
+```bash
+docker compose up --build
+```
+
